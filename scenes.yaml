@@ -1,0 +1,28 @@
+- id: '1765466705222'
+  name: Outside - All Lights On
+  entities:
+    switch.front_floods:
+      state: 'on'
+    switch.back_floods_s2_on_off_switch:
+      state: 'on'
+    light.door_lamp:
+      state: 'on'
+    light.smart_wi_fi_switch:
+      state: 'on'
+    light.string_lights:
+      state: 'on'
+  icon: mdi:outdoor-lamp
+- id: '1765466737911'
+  name: Outside - All Lights Off
+  entities:
+    switch.front_floods:
+      state: 'off'
+    switch.back_floods_s2_on_off_switch:
+      state: 'off'
+    light.door_lamp:
+      state: 'off'
+    light.smart_wi_fi_switch:
+      state: 'off'
+    light.string_lights:
+      state: 'off'
+  icon: mdi:lightbulb-group-off

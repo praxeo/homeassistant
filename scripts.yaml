@@ -1,0 +1,24 @@
+'1762320201068':
+  sequence:
+  - type: turn_off
+    device_id: 0d2452d82064c6bc0ca106e3ff932046
+    entity_id: 8a84e0500a26257b2d6a05548452981f
+    domain: switch
+    metadata:
+      secondary: false
+  alias: New script
+  description: ''
+new_script:
+  sequence:
+  - device_id: c153885dea36fa7fa4b5fd2bccfb2b57
+    domain: button
+    entity_id: ad878eeaa5c861f37d795fc10cee0976
+    type: press
+    metadata:
+      secondary: true
+  - device_id: 24b11e92f6de20cd27f543cffd87a6ef
+    domain: button
+    entity_id: 27ee88146e89b7f955afad4667554748
+    type: press
+  alias: New script
+  description: ''

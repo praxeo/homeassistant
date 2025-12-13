@@ -1,0 +1,37 @@
+secrets.yaml
+.storage/
+.cloud/
+auth/
+*.db
+*.db-shm
+*.db-wal
+home-assistant_v2.db*
+backups/
+*.tar
+tts/
+__pycache__/
+*.pyc
+.HA_VERSION
+home-assistant.log*
+*.log
+zigbee.db*
+.DS_Store
+.idea/
+*.swp
+.google.token
+.ha_run.lock
+
+# Custom components (reinstallable via HACS)
+custom_components/
+
+# Frontend downloads
+www/community/
+
+# Dwains dashboard configs (if auto-generated)
+dwains-dashboard/
+
+# Lutron certificates
+lutron_caseta*.pem
+
+# Zigbee2MQTT (if managed separately)
+zigbee2mqtt/
