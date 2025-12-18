@@ -1,3 +1,22 @@
+# Track only selected Home Assistant configuration exports
+
+# Ignore everything by default
+*
+
+# Allow directories so individual files can be un-ignored
+!*/
+
+# Allow select file types
+!.gitignore
+!*.yaml
+!*.yml
+!*.md
+!*.txt
+!*.sh
+!export_entities.py
+
+# Explicitly ignore sensitive/unneeded data
+.hass_env
 secrets.yaml
 .storage/
 .cloud/
@@ -20,6 +39,7 @@ zigbee.db*
 *.swp
 .google.token
 .ha_run.lock
+deps/
 
 # Custom components (reinstallable via HACS)
 custom_components/
