@@ -847,11 +847,12 @@
   max_exceeded: silent
 - id: '1765498448148'
   alias: Garage Entry Lamp + Front Floods + Porch Chandelier - Boost on Activity
-  description: 'During dark hours, when garage/basement bay door opens OR garage exterior
-    entry door changes state OR garage motion occurs: turn on front floods + garage
-    entry lamp and boost front porch chandelier to 100%. After 10 minutes, turn floods
-    off. Only turn off garage entry lamp after 9:30 PM (preserves evening schedule).
-    Restore chandelier to 50% if before 9:30 PM, otherwise turn it off.
+  description: 'During dark hours, when garage bay door opens OR basement bay door
+    opens OR garage exterior entry door changes state OR garage motion occurs: turn
+    on front floods + garage entry lamp and boost front porch chandelier to 100%.
+    After 10 minutes, turn floods off. Only turn off garage entry lamp after 9:30
+    PM (preserves evening schedule). Restore chandelier to 50% if before 9:30 PM,
+    otherwise turn it off.
 
     '
   triggers:
@@ -861,7 +862,7 @@
     to: open
   - id: basement_bay_open
     trigger: state
-    entity_id: cover.basement_bay_door
+    entity_id: cover.ratgdo32_b1e618_door
     to: open
   - id: garage_ext_open
     trigger: state
