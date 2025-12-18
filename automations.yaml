@@ -44,6 +44,7 @@
           - switch.laundry_room_lamp
           - light.smart_wi_fi_dimmer_switch_2
   mode: single
+
 - id: '1762390655968'
   alias: Bathroom heater turn off after 1 hour for safety
   description: If the switch remains on for 1 hour, turn it off automatically.
@@ -64,6 +65,7 @@
     entity_id: 978cfbdfa20cb695397a709c892aaf12
     domain: switch
   mode: single
+
 - id: '1762988323768'
   alias: Basement GDO light on w door open
   description: ''
@@ -87,6 +89,7 @@
     target:
       entity_id: light.ratgdo32_b1e618_light
   mode: restart
+
 - id: '1763075020086'
   alias: Mail - status logic
   description: Daily reset + first open = delivered, later open = retrieved
@@ -139,6 +142,7 @@
         action: input_boolean.turn_on
     default: []
   mode: single
+
 - id: '1763082371549'
   alias: ratGDO garage Light on Door Open
   description: Turns on the GDO light when the door opens, then automatically turns
@@ -175,6 +179,7 @@
       entity_id: switch.heavy_duty_switch
     data: {}
   mode: restart
+
 - id: '1763344341244'
   alias: Basement opener light on with ext entry
   description: ''
@@ -220,6 +225,7 @@
     target:
       entity_id: light.door_lamp
   mode: single
+
 - id: '1763391702514'
   alias: Basement Door Lamp when Doors Open
   description: 'Automatically turn on the basement entry door lamp when the basement
@@ -228,8 +234,9 @@
 
     '
   triggers:
-  - entity_id: cover.basement_bay_door
-    to: open
+  # CHANGED: bay door trigger -> motor on
+  - entity_id: binary_sensor.ratgdo32_b1e618_motor
+    to: 'on'
     trigger: state
   - entity_id: binary_sensor.basement_entry_sensor
     from: 'off'
@@ -255,6 +262,7 @@
     target:
       entity_id: light.basement_entry_door_lamp
   mode: restart
+
 - id: '1763421592742'
   alias: Basement door lamp on with bay door open/close
   description: ''
@@ -293,6 +301,7 @@
     entity_id: 264a1685266f1d4fd397285233464ef9
     domain: light
   mode: single
+
 - id: '1763505930978'
   alias: Tree timer
   description: ''
@@ -324,6 +333,7 @@
     entity_id: 81aa7159970d8d04ef855fadf9177bba
     domain: switch
   mode: single
+
 - id: '1763591102280'
   alias: Hall closet light with door
   description: ''
@@ -360,6 +370,7 @@
           entity_id: light.smart_wi_fi_light_switch
         data: {}
   mode: single
+
 - id: '1763596138419'
   alias: Second pantry door light
   description: ''
@@ -392,6 +403,7 @@
           entity_id: light.second_pantry_light_2
         action: light.turn_off
   mode: restart
+
 - id: '1763610032980'
   alias: 'RatGDO light on with garage ext door open '
   description: ''
@@ -416,6 +428,7 @@
     target:
       entity_id: light.ratgdo32_2b8ecc_light
   mode: restart
+
 - id: '1763750403837'
   alias: Bathroom closet occupancy
   description: Light on with motion, off after 3 min of no motion
@@ -450,6 +463,7 @@
           entity_id: switch.bathroom_closet_switch
         action: switch.turn_off
   mode: restart
+
 - id: '1764033551976'
   alias: Christmas lights On at sunset and off at 10 PM
   description: Turn ON at sunset, and OFF at 10 PM
@@ -491,6 +505,7 @@
           - light.christmas_front_spotlight_zigbee_plug
         action: homeassistant.turn_off
   mode: single
+
 - id: '1764125322343'
   alias: String lights on at sunset off at 8 PM
   description: ''
@@ -522,6 +537,7 @@
         entity_id: f65bfd4837fe6863371018e0eb034445
         domain: light
   mode: restart
+
 - id: '1764209356273'
   alias: 'Basement bay door toggle '
   description: ''
@@ -540,6 +556,7 @@
     entity_id: 27ee88146e89b7f955afad4667554748
     type: press
   mode: single
+
 - id: '1764807475303'
   alias: Auto Light - Motion and Door (20m) basement stairs
   description: Turn on switch on activity, turn off after 20 minutes of no activity.
@@ -571,6 +588,7 @@
     domain: switch
   mode: restart
   max_exceeded: silent
+
 - id: '1764807600000'
   alias: Basement Hallway Lights - Entry Detection
   triggers:
@@ -594,6 +612,7 @@
       entity_id: switch.basement_hall_light_switch
     action: switch.turn_off
   mode: restart
+
 - id: '1765084295736'
   alias: Gym neon sign toggle with zigbee button presss
   description: ''
@@ -610,6 +629,7 @@
     entity_id: c734edf927d355b1a10fcd1941d84fff
     domain: light
   mode: single
+
 - id: '1765086655935'
   alias: Kitchen Thermostat Schedule
   description: Morning warm-up and midday setback (heating season only)
@@ -650,6 +670,7 @@
           temperature: 66
           hvac_mode: heat
   mode: single
+
 - id: '1765114078416'
   alias: Bathroom heater morning schedule
   description: Turn on bathroom heater at 4:45 AM, off after 1 hour
@@ -669,6 +690,7 @@
     target:
       entity_id: switch.bathroom_heater
   mode: single
+
 - id: '1765272182899'
   alias: 'QR2 toggle garage bay door '
   description: ''
@@ -682,6 +704,7 @@
     entity_id: 1fab041efea07bab003fd818624350db
     type: press
   mode: single
+
 - id: '1765280885986'
   alias: String lights on with porch door (after hours)
   description: Turn on string lights for 5 minutes when porch door opens during dark
@@ -712,6 +735,7 @@
     target:
       entity_id: light.string_lights
   mode: restart
+
 - id: '1765285524166'
   alias: QR1 is scanned toggle basement bay door
   description: ''
@@ -726,13 +750,15 @@
       entity_id: button.ratgdo32_b1e618_toggle_door
     data: {}
   mode: single
+
 - id: '1765414185155'
   alias: Garage Overhead Light - On With Bay Door Open
   description: Turn on garage overhead light when bay door opens; off after 10 minutes
     unless retriggered
   triggers:
-  - entity_id: cover.ratgdo32_2b8ecc_door
-    to: open
+  # CHANGED: bay door trigger -> motor on
+  - entity_id: binary_sensor.ratgdo32_2b8ecc_motor
+    to: 'on'
     trigger: state
   actions:
   - action: switch.turn_on
@@ -745,6 +771,7 @@
       entity_id: switch.heavy_duty_switch
   mode: restart
   max_exceeded: silent
+
 - id: '1765414341105'
   alias: Garage Overhead Light - Doors Logic
   description: 'Turn on Garage Overhead Light when garage bay door opens (10 min,
@@ -753,9 +780,10 @@
 
     '
   triggers:
+  # CHANGED: bay door trigger -> motor on
   - id: bay_door
-    entity_id: cover.ratgdo32_2b8ecc_door
-    to: open
+    entity_id: binary_sensor.ratgdo32_2b8ecc_motor
+    to: 'on'
     trigger: state
   - id: ext_door
     entity_id: binary_sensor.garage_door_exterior_entry_sensor
@@ -797,6 +825,7 @@
           entity_id: switch.heavy_duty_switch
   mode: restart
   max_exceeded: silent
+
 - id: '1765415314192'
   alias: Outdoor Lights - Daytime Kill Switch (With Twilight Buffer)
   description: 'Force all outdoor lights off during the main part of the day: from
@@ -845,6 +874,7 @@
     data: {}
   mode: single
   max_exceeded: silent
+
 - id: '1765498448148'
   alias: Garage Entry Lamp + Front Floods + Porch Chandelier - Boost on Activity
   description: 'During dark hours, when garage bay door opens OR basement bay door
@@ -856,14 +886,15 @@
 
     '
   triggers:
+  # CHANGED: bay door triggers -> motor on
   - id: garage_bay_open
     trigger: state
-    entity_id: cover.ratgdo32_2b8ecc_door
-    to: open
+    entity_id: binary_sensor.ratgdo32_2b8ecc_motor
+    to: 'on'
   - id: basement_bay_open
     trigger: state
-    entity_id: cover.ratgdo32_b1e618_door
-    to: open
+    entity_id: binary_sensor.ratgdo32_b1e618_motor
+    to: 'on'
   - id: garage_ext_open
     trigger: state
     entity_id: binary_sensor.garage_door_exterior_entry_sensor
@@ -924,6 +955,7 @@
         entity_id: light.front_porch_chandelier
   mode: restart
   max_exceeded: silent
+
 - id: '1765509511875'
   alias: Basement Overhead Light - Work Mode (8h Max)
   description: 'Hold top paddle (Scene 001, KeyHeldDown) on node 17 to enable work
@@ -954,6 +986,7 @@
       entity_id: input_boolean.basement_work_mode
   mode: restart
   max_exceeded: silent
+
 - id: '1765510218408'
   alias: Basement Overhead Light - Doors (25m Auto-Off)
   description: 'Turn on the basement overhead light when the basement interior, entry,
@@ -970,8 +1003,10 @@
     entity_id: binary_sensor.basement_entry_sensor
     from: 'off'
     to: 'on'
+  # CHANGED: bay door trigger -> motor on
   - trigger: state
-    entity_id: cover.ratgdo32_b1e618_door
+    entity_id: binary_sensor.ratgdo32_b1e618_motor
+    to: 'on'
   conditions: []
   actions:
   - action: switch.turn_on
@@ -990,6 +1025,7 @@
           entity_id: switch.basement_overhead_light
   mode: restart
   max_exceeded: silent
+
 - id: '1765510766593'
   alias: Basement Work Mode -Turning off work mode Starts 10m Timer
   description: 'When work mode is turned off while the basement overhead light is
@@ -1005,100 +1041,4 @@
   - condition: state
     entity_id: switch.basement_overhead_light
     state: 'on'
-  actions:
-  - delay:
-      minutes: 10
-  - action: switch.turn_off
-    target:
-      entity_id: switch.basement_overhead_light
-  mode: restart
-  max_exceeded: silent
-- id: '1765567220684'
-  alias: Front Porch Chandelier - Door Triggered
-  description: 'Turn on chandelier when front door opens (dark hours only). After
-    2 minutes, restore to 50% if before 9:30 PM, otherwise turn off.
-
-    '
-  triggers:
-  - trigger: state
-    entity_id: binary_sensor.front_door_sensor
-    from: 'off'
-    to: 'on'
-  conditions:
-  - condition: or
-    conditions:
-    - condition: sun
-      after: sunset
-      after_offset: -01:00:00
-    - condition: sun
-      before: sunrise
-      before_offset: 01:00:00
-  - condition: template
-    value_template: "{{ is_state('light.front_porch_chandelier', 'off') or \n   state_attr('light.front_porch_chandelier',
-      'brightness') | int(0) < 255 }}\n"
-  actions:
-  - action: light.turn_on
-    target:
-      entity_id: light.front_porch_chandelier
-    data:
-      brightness_pct: 100
-  - delay:
-      minutes: 2
-  - choose:
-    - conditions:
-      - condition: time
-        before: '21:30:00'
-        after: '12:00:00'
-      sequence:
-      - action: light.turn_on
-        target:
-          entity_id: light.front_porch_chandelier
-        data:
-          brightness_pct: 50
-    default:
-    - action: light.turn_off
-      target:
-        entity_id: light.front_porch_chandelier
-  mode: restart
-  max_exceeded: silent
-- id: '1765576772274'
-  alias: Front Porch & Garage Entry Lamp - Evening Schedule
-  description: 'Turn on front porch chandelier (50%), garage entry lamp, and front
-    splash lights at sunset. Turn all off at 9:30 PM.
-
-    '
-  triggers:
-  - trigger: sun
-    event: sunset
-    id: turn_on
-  - trigger: time
-    at: '21:30:00'
-    id: turn_off
-  conditions: []
-  actions:
-  - choose:
-    - conditions:
-      - condition: trigger
-        id: turn_on
-      sequence:
-      - action: light.turn_on
-        target:
-          entity_id: light.front_porch_chandelier
-        data:
-          brightness_pct: 50
-      - action: light.turn_on
-        target:
-          entity_id:
-          - light.smart_wi_fi_switch
-          - light.front_splash_light
-    - conditions:
-      - condition: trigger
-        id: turn_off
-      sequence:
-      - action: light.turn_off
-        target:
-          entity_id:
-          - light.front_porch_chandelier
-          - light.smart_wi_fi_switch
-          - light.front_splash_light
-  mode: single
+  acti
