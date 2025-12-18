@@ -846,25 +846,35 @@
   mode: single
   max_exceeded: silent
 - id: '1765498448148'
-  alias: Garage Entry Lamp and Front Floods - Motion & Doors
-  description: 'Turn on front floods and entry lamp when garage doors open or motion
-    is detected (dark hours). Turn off floods after 10 min of no activity. Only turn
-    off entry lamp if it is after 9:30 PM (preserving evening schedule).
+  alias: Garage Entry Lamp + Front Floods + Porch Chandelier - Boost on Activity
+  description: 'During dark hours, when garage/basement bay door opens OR garage exterior
+    entry door changes state OR garage motion occurs: turn on front floods + garage
+    entry lamp and boost front porch chandelier to 100%. After 10 minutes, turn floods
+    off. Only turn off garage entry lamp after 9:30 PM (preserves evening schedule).
+    Restore chandelier to 50% if before 9:30 PM, otherwise turn it off.
 
     '
   triggers:
-  - trigger: state
+  - id: garage_bay_open
+    trigger: state
     entity_id: cover.ratgdo32_2b8ecc_door
     to: open
-  - trigger: state
+  - id: basement_bay_open
+    trigger: state
+    entity_id: cover.basement_bay_door
+    to: open
+  - id: garage_ext_open
+    trigger: state
     entity_id: binary_sensor.garage_door_exterior_entry_sensor
     from: 'off'
     to: 'on'
-  - trigger: state
+  - id: garage_ext_close
+    trigger: state
     entity_id: binary_sensor.garage_door_exterior_entry_sensor
     from: 'on'
     to: 'off'
-  - trigger: state
+  - id: garage_motion
+    trigger: state
     entity_id: binary_sensor.ratgdo32_2b8ecc_motion
     to: 'on'
   conditions:
@@ -872,7 +882,7 @@
     after: sunset
     after_offset: -01:00:00
     before: sunrise
-    before_offset: +01:00:00
+    before_offset: 01:00:00
   actions:
   - action: switch.turn_on
     target:
@@ -880,17 +890,39 @@
   - action: light.turn_on
     target:
       entity_id: light.smart_wi_fi_switch
-  - delay:
-      minutes: 10
+  - action: light.turn_on
+    target:
+      entity_id: light.front_porch_chandelier
+    data:
+      brightness_pct: 100
+  - delay: 00:10:00
   - action: switch.turn_off
     target:
       entity_id: switch.front_floods
-  - condition: time
-    after: '21:30:00'
-  - action: light.turn_off
-    target:
-      entity_id: light.smart_wi_fi_switch
+  - choose:
+    - conditions:
+      - condition: time
+        after: '21:30:00'
+      sequence:
+      - action: light.turn_off
+        target:
+          entity_id: light.smart_wi_fi_switch
+  - choose:
+    - conditions:
+      - condition: time
+        before: '21:30:00'
+      sequence:
+      - action: light.turn_on
+        target:
+          entity_id: light.front_porch_chandelier
+        data:
+          brightness_pct: 50
+    default:
+    - action: light.turn_off
+      target:
+        entity_id: light.front_porch_chandelier
   mode: restart
+  max_exceeded: silent
 - id: '1765509511875'
   alias: Basement Overhead Light - Work Mode (8h Max)
   description: 'Hold top paddle (Scene 001, KeyHeldDown) on node 17 to enable work
