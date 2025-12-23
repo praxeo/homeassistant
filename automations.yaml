@@ -1000,10 +1000,11 @@
   mode: restart
   max_exceeded: silent
 - id: '1765567220684'
-  alias: Front Porch Chandelier - Door Triggered
-  description: Turn on chandelier when front door opens OR front door motion triggers
-    (dark hours only). After 2 minutes, restore to 50% if before 9:30 PM, otherwise
-    turn off.
+  alias: Front Porch Chandelier + Floods + Garage Entry - Door Triggered
+  description: Turn on front porch chandelier, front floods, and garage entry lamp
+    when front door opens OR front door motion triggers (dark hours only). After 2
+    minutes, restore chandelier to 50% if before 9:30 PM (floods + garage lamp off),
+    otherwise turn everything off.
   triggers:
   - entity_id: binary_sensor.front_door_sensor
     from: 'off'
@@ -1023,31 +1024,47 @@
       before: sunrise
       before_offset: 01:00:00
   - condition: template
-    value_template: '{{ is_state(''light.front_porch_chandelier'', ''off'') or (state_attr(''light.front_porch_chandelier'',''brightness'')
-      | int(0) < 255) }}'
+    value_template: "{{ is_state('light.front_porch_chandelier', 'off')\n   or (state_attr('light.front_porch_chandelier','brightness')
+      | int(0) < 255) }}"
   actions:
   - action: light.turn_on
     target:
-      entity_id: light.front_porch_chandelier
+      entity_id:
+      - light.front_porch_chandelier
+      - light.smart_wi_fi_switch
     data:
       brightness_pct: 100
+  - action: switch.turn_on
+    target:
+      entity_id: switch.front_floods
   - delay:
       minutes: 2
   - choose:
     - conditions:
       - condition: time
-        before: '21:30:00'
         after: '12:00:00'
+        before: '21:30:00'
       sequence:
       - action: light.turn_on
         target:
           entity_id: light.front_porch_chandelier
         data:
           brightness_pct: 50
+      - action: light.turn_off
+        target:
+          entity_id: light.smart_wi_fi_switch
+      - action: switch.turn_off
+        target:
+          entity_id: switch.front_floods
     default:
     - action: light.turn_off
       target:
-        entity_id: light.front_porch_chandelier
+        entity_id:
+        - light.front_porch_chandelier
+        - light.smart_wi_fi_switch
+    - action: switch.turn_off
+      target:
+        entity_id: switch.front_floods
   mode: restart
   max_exceeded: silent
 - id: '1765576772274'
