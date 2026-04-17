@@ -1,0 +1,719 @@
+# Home Assistant Automations - April 12, 2026 (Snapshot 4_12.26)
+# ~60 active automations managing lighting, doors, thermostats, and scene control
+# Reference: user's 700+ entity system, Z-Wave + Zigbee protocols
+
+# ====================================================================
+# EVENING LAMPS SCHEDULE
+# ====================================================================
+- alias: Evening Lamps Schedule
+  id: "1762226378667"
+  description: "Entryway vase lamp on ~1h35m before sunset. Kitchen drop lights at 80% ~1h before sunset. Remaining lamps on ~35m before sunset. All off at 9:30 PM."
+  triggers:
+    - event: sunset
+      offset: "-01:35:00"
+      id: vase_early
+      trigger: sun
+    - event: sunset
+      offset: "-01:00:00"
+      id: kitchen_drops
+      trigger: sun
+    - event: sunset
+      offset: "-00:35:00"
+      id: turn_on
+      trigger: sun
+    - at: "21:30:00"
+      id: turn_off
+      trigger: time
+  conditions: []
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: vase_early
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id: light.entryway_vase_lamp_plug
+        - conditions:
+            - condition: trigger
+              id: kitchen_drops
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id: light.kitchen_drop_lights
+              data:
+                brightness_pct: 80
+        - conditions:
+            - condition: trigger
+              id: turn_on
+          sequence:
+            - action: switch.turn_on
+              target:
+                entity_id:
+                  - switch.mini_smart_wi_fi_plug
+                  - switch.magnolia_lamp
+                  - switch.tz3210_xej4kukg_ts011f
+                  - switch.laundry_room_lamp
+                  - switch.music_room_lamp
+            - action: light.turn_on
+              target:
+                entity_id: light.smart_wi_fi_dimmer_switch_2
+              data:
+                brightness_pct: 50
+            - action: light.turn_on
+              target:
+                entity_id: light.lamp_glass_table_living_room
+        - conditions:
+            - condition: trigger
+              id: turn_off
+          sequence:
+            - action: homeassistant.turn_off
+              target:
+                entity_id:
+                  - switch.mini_smart_wi_fi_plug
+                  - switch.magnolia_lamp
+                  - switch.tz3210_xej4kukg_ts011f
+                  - switch.laundry_room_lamp
+                  - light.smart_wi_fi_dimmer_switch_2
+                  - switch.music_room_lamp
+                  - light.entryway_vase_lamp_plug
+                  - light.lamp_glass_table_living_room
+                  - light.kitchen_drop_lights
+  mode: single
+
+# ====================================================================
+# MBR BEDSIDE SCENE CONTROLLER (MOES 4-WAY)
+# ====================================================================
+- alias: MBR Bedside Scene Controller (Moes 4-Way)
+  id: "1771122202365"
+  description: "Button 1: 1x=on 20%, 2x=75%, long=100%. Button 2: short=toggle sound machine, 2x=toggle MBR fan/light combo switch, long=toggle MBR fan/light combo light. Button 3: 1x=off, 2x=nightlight 5%, long=dim -25%. Button 4: short=goodnight (kill lamps, kitchen lights, cancel work modes, lock doors, close garages). Button 4 long=cool bedtime mode toggle."
+  triggers:
+    - id: btn1_single
+      trigger: event
+      event_type: zha_event
+      event_data:
+        device_ieee: "0c:2a:6f:ff:fe:5c:93:2a"
+        endpoint_id: 1
+        command: remote_button_short_press
+    - id: btn1_double
+      trigger: event
+      event_type: zha_event
+      event_data:
+        device_ieee: "0c:2a:6f:ff:fe:5c:93:2a"
+        endpoint_id: 1
+        command: remote_button_double_press
+    - id: btn1_long
+      trigger: event
+      event_type: zha_event
+      event_data:
+        device_ieee: "0c:2a:6f:ff:fe:5c:93:2a"
+        endpoint_id: 1
+        command: remote_button_long_press
+    - id: btn2_short
+      trigger: event
+      event_type: zha_event
+      event_data:
+        device_ieee: "0c:2a:6f:ff:fe:5c:93:2a"
+        endpoint_id: 2
+        command: remote_button_short_press
+    - id: btn2_double
+      trigger: event
+      event_type: zha_event
+      event_data:
+        device_ieee: "0c:2a:6f:ff:fe:5c:93:2a"
+        endpoint_id: 2
+        command: remote_button_double_press
+    - id: btn2_long
+      trigger: event
+      event_type: zha_event
+      event_data:
+        device_ieee: "0c:2a:6f:ff:fe:5c:93:2a"
+        endpoint_id: 2
+        command: remote_button_long_press
+    - id: btn3_single
+      trigger: event
+      event_type: zha_event
+      event_data:
+        device_ieee: "0c:2a:6f:ff:fe:5c:93:2a"
+        endpoint_id: 3
+        command: remote_button_short_press
+    - id: btn3_double
+      trigger: event
+      event_type: zha_event
+      event_data:
+        device_ieee: "0c:2a:6f:ff:fe:5c:93:2a"
+        endpoint_id: 3
+        command: remote_button_double_press
+    - id: btn3_long
+      trigger: event
+      event_type: zha_event
+      event_data:
+        device_ieee: "0c:2a:6f:ff:fe:5c:93:2a"
+        endpoint_id: 3
+        command: remote_button_long_press
+    - id: btn4_short
+      trigger: event
+      event_type: zha_event
+      event_data:
+        device_ieee: "0c:2a:6f:ff:fe:5c:93:2a"
+        endpoint_id: 4
+        command: remote_button_short_press
+    - id: btn4_long
+      trigger: event
+      event_type: zha_event
+      event_data:
+        device_ieee: "0c:2a:6f:ff:fe:5c:93:2a"
+        endpoint_id: 4
+        command: remote_button_long_press
+  conditions: []
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: btn1_single
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id: light.lamp_dimmer_bedroom_john
+              data:
+                brightness_pct: 20
+        - conditions:
+            - condition: trigger
+              id: btn1_double
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id: light.lamp_dimmer_bedroom_john
+              data:
+                brightness_pct: 75
+        - conditions:
+            - condition: trigger
+              id: btn1_long
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id: light.lamp_dimmer_bedroom_john
+              data:
+                brightness_pct: 100
+        - conditions:
+            - condition: trigger
+              id: btn2_short
+          sequence:
+            - action: switch.toggle
+              target:
+                entity_id: switch.tz3210_xej4kukg_ts011f_2
+        - conditions:
+            - condition: trigger
+              id: btn2_double
+          sequence:
+            - action: switch.toggle
+              target:
+                entity_id: switch.mbr_light_fan_combo_switch
+        - conditions:
+            - condition: trigger
+              id: btn2_long
+          sequence:
+            - action: light.toggle
+              target:
+                entity_id: light.mbr_light_fan_combo_switch
+        - conditions:
+            - condition: trigger
+              id: btn3_single
+          sequence:
+            - action: light.turn_off
+              target:
+                entity_id: light.lamp_dimmer_bedroom_john
+        - conditions:
+            - condition: trigger
+              id: btn3_double
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id: light.lamp_dimmer_bedroom_john
+              data:
+                brightness_pct: 5
+        - conditions:
+            - condition: trigger
+              id: btn3_long
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id: light.lamp_dimmer_bedroom_john
+              data:
+                brightness_step_pct: -25
+        - conditions:
+            - condition: trigger
+              id: btn4_short
+          sequence:
+            - action: homeassistant.turn_off
+              target:
+                entity_id:
+                  - switch.mini_smart_wi_fi_plug
+                  - switch.magnolia_lamp
+                  - switch.tz3210_xej4kukg_ts011f
+                  - switch.laundry_room_lamp
+                  - switch.music_room_lamp
+                  - light.smart_wi_fi_dimmer_switch_2
+                  - light.lamp_glass_table_living_room
+            - action: light.turn_off
+              target:
+                entity_id:
+                  - light.kitchen_drop_lights
+                  - light.kitchen_recessed_dimmer
+            - action: input_boolean.turn_off
+              target:
+                entity_id:
+                  - input_boolean.basement_work_mode
+                  - input_boolean.garage_work_mode
+            - action: lock.lock
+              target:
+                entity_id:
+                  - lock.home_connect_620_connected_smart_lock
+                  - lock.home_connect_620_connected_smart_lock_2
+                  - lock.home_connect_620_connected_smart_lock_3
+                  - lock.home_connect_620_connected_smart_lock_4
+            - action: cover.close_cover
+              target:
+                entity_id:
+                  - cover.ratgdo32_2b8ecc_door
+                  - cover.ratgdo32_b1e618_door
+                  - cover.ratgdo_left_basement_door
+        - conditions:
+            - condition: trigger
+              id: btn4_long
+          sequence:
+            - action: input_boolean.toggle
+              target:
+                entity_id: input_boolean.cool_bedtime_mode
+  mode: single
+
+# ====================================================================
+# SPACE HEATERS - AUTO OFF AFTER 1 HOUR (SAFETY)
+# ====================================================================
+- alias: Space Heaters - Auto Off After 1 Hour (Safety)
+  id: "1762390655968"
+  description: "Automatically disable bathroom heater and office space heater after 1 hour for safety."
+  triggers:
+    - trigger: state
+      entity_id: switch.bathroom_heater
+      from: "off"
+      to: "on"
+      id: bathroom_heater_on
+    - trigger: state
+      entity_id: switch.space_heater_office1
+      from: "off"
+      to: "on"
+      id: office_heater_on
+  conditions: []
+  actions:
+    - delay:
+        hours: 1
+    - action: homeassistant.turn_off
+      target:
+        entity_id: "{{ trigger.entity_id }}"
+  mode: single
+
+# ====================================================================
+# KITCHEN THERMOSTAT - COOL BEDTIME MODE
+# ====================================================================
+- alias: Kitchen Thermostat - Cool Bedtime Mode
+  id: "1772766497720"
+  description: "When cool_bedtime_mode is enabled, set kitchen thermostat to 66°F. When disabled, resume normal operation."
+  triggers:
+    - trigger: state
+      entity_id: input_boolean.cool_bedtime_mode
+      from: "off"
+      to: "on"
+      id: bedtime_mode_on
+    - trigger: state
+      entity_id: input_boolean.cool_bedtime_mode
+      from: "on"
+      to: "off"
+      id: bedtime_mode_off
+  conditions: []
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: bedtime_mode_on
+          sequence:
+            - action: climate.set_temperature
+              target:
+                entity_id: climate.t6_pro_z_wave_programmable_thermostat_2
+              data:
+                temperature: 66
+        - conditions:
+            - condition: trigger
+              id: bedtime_mode_off
+          sequence:
+            - action: climate.set_temperature
+              target:
+                entity_id: climate.t6_pro_z_wave_programmable_thermostat_2
+              data:
+                temperature: 72
+  mode: single
+
+# ====================================================================
+# BASEMENT OVERHEAD LIGHTS - UNIFIED SYNC (Work Mode + Manual Off Cancel)
+# ====================================================================
+- alias: "Basement Overhead Lights - Unified Sync (One Entity + Work Mode Cancel on Manual Off)"
+  id: basement_overhead_lights_unified_sync
+  description: "Keep basement overhead lights synced. Cancel work mode on manual off."
+  triggers:
+    - trigger: state
+      entity_id: switch.basement_overhead_light
+      id: basement_override
+  conditions: []
+  actions:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: switch.basement_overhead_light
+              state: "off"
+          sequence:
+            - action: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.basement_work_mode
+  mode: single
+
+# ====================================================================
+# BASEMENT OVERHEAD LIGHTS - ACTIVITY STARTS HOLD TIMER
+# ====================================================================
+- alias: "Basement Overhead Lights - Activity Starts Hold Timer"
+  id: basement_overhead_lights_activity_start_hold
+  description: "Motion or door activity in basement stairs/entry starts 20-minute hold timer."
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.motion_sensor_stairway_occupancy
+      to: "on"
+      id: motion_stairs
+    - trigger: state
+      entity_id: binary_sensor.basement_entry_sensor
+      to: "on"
+      id: entry_door
+    - trigger: state
+      entity_id: binary_sensor.basement_int_door_sensor
+      to: "on"
+      id: int_door
+  conditions: []
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id: switch.basement_overhead_light
+    - action: timer.start
+      target:
+        entity_id: timer.timer_basement_overhead_hold
+      data:
+        duration: "00:20:00"
+  mode: restart
+
+# ====================================================================
+# BASEMENT OVERHEAD LIGHTS - HOLD TIMER FINISHED => OFF
+# ====================================================================
+- alias: "Basement Overhead Lights - Hold Timer Finished => OFF"
+  id: basement_overhead_lights_hold_timer_finished_off
+  description: "When basement overhead hold timer expires, turn off lights (unless work mode active)."
+  triggers:
+    - trigger: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.timer_basement_overhead_hold
+  conditions:
+    - condition: state
+      entity_id: input_boolean.basement_work_mode
+      state: "off"
+  actions:
+    - action: switch.turn_off
+      target:
+        entity_id: switch.basement_overhead_light
+  mode: single
+
+# ====================================================================
+# GARAGE LIGHTS - UNIFIED SYNC (Overhead + ratGDO)
+# ====================================================================
+- alias: "Garage Lights - Unified Sync (Overhead + ratGDO Tied Together)"
+  id: "1770782674430"
+  description: "Keep garage overhead and ratGDO lights synced when either is toggled."
+  triggers:
+    - trigger: state
+      entity_id: switch.heavy_duty_switch
+      id: overhead_switch
+    - trigger: state
+      entity_id: light.ratgdo32_2b8ecc_light
+      id: ratgdo_light
+  conditions: []
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: overhead_switch
+            - condition: state
+              entity_id: light.ratgdo32_2b8ecc_light
+              state: "{{ states('switch.heavy_duty_switch') }}"
+              match: none
+          sequence:
+            - service: "light.{{ states('switch.heavy_duty_switch') | replace('on', 'turn_on') | replace('off', 'turn_off') }}"
+              target:
+                entity_id: light.ratgdo32_2b8ecc_light
+        - conditions:
+            - condition: trigger
+              id: ratgdo_light
+            - condition: state
+              entity_id: switch.heavy_duty_switch
+              state: "{{ states('light.ratgdo32_2b8ecc_light') }}"
+              match: none
+          sequence:
+            - service: "switch.{{ states('light.ratgdo32_2b8ecc_light') | replace('on', 'turn_on') | replace('off', 'turn_off') }}"
+              target:
+                entity_id: switch.heavy_duty_switch
+  mode: single
+
+# ====================================================================
+# EXTERIOR LIGHTS MASTER - SCHEDULE + ACTIVITY (SINGLE OWNER)
+# ====================================================================
+- alias: "Exterior Lights Master - Schedule + Activity (Single Owner)"
+  id: "1768719952633"
+  description: "Front porch chandelier, floods, and garage entry lamp on at sunset + 35min. Off at midnight. Activity (doorbell, motion, door open) boosts brightness."
+  triggers:
+    - trigger: sun
+      event: sunset
+      offset: "00:35:00"
+      id: sunset_boost
+    - trigger: time
+      at: "00:00:00"
+      id: midnight_off
+    - trigger: state
+      entity_id: binary_sensor.front_door_person_detection
+      to: "on"
+      id: front_person
+    - trigger: state
+      entity_id: binary_sensor.front_door_motion_alarm
+      to: "on"
+      id: front_motion
+    - trigger: state
+      entity_id: binary_sensor.front_door_sensor
+      to: "on"
+      id: front_door_open
+  conditions: []
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: sunset_boost
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.front_porch_chandelier
+                  - switch.front_floods
+                  - light.smart_wi_fi_switch
+              data:
+                brightness_pct: 70
+        - conditions:
+            - condition: trigger
+              id: midnight_off
+          sequence:
+            - action: light.turn_off
+              target:
+                entity_id:
+                  - light.front_porch_chandelier
+                  - switch.front_floods
+                  - light.smart_wi_fi_switch
+        - conditions:
+            - condition: trigger
+              id: front_person
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.front_porch_chandelier
+                  - switch.front_floods
+                  - light.smart_wi_fi_switch
+              data:
+                brightness_pct: 100
+        - conditions:
+            - condition: trigger
+              id: front_motion
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.front_porch_chandelier
+                  - switch.front_floods
+                  - light.smart_wi_fi_switch
+              data:
+                brightness_pct: 100
+        - conditions:
+            - condition: trigger
+              id: front_door_open
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.front_porch_chandelier
+                  - switch.front_floods
+                  - light.smart_wi_fi_switch
+              data:
+                brightness_pct: 100
+  mode: restart
+
+# ====================================================================
+# BATHROOM HEATER MORNING SCHEDULE
+# ====================================================================
+- alias: Bathroom heater morning schedule
+  id: "1765114078416"
+  description: "Turn on bathroom heater at 9:30 AM and off at 10:00 AM daily."
+  triggers:
+    - trigger: time
+      at: "09:30:00"
+      id: heater_on
+    - trigger: time
+      at: "10:00:00"
+      id: heater_off
+  conditions: []
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: heater_on
+          sequence:
+            - action: switch.turn_on
+              target:
+                entity_id: switch.bathroom_heater
+        - conditions:
+            - condition: trigger
+              id: heater_off
+          sequence:
+            - action: switch.turn_off
+              target:
+                entity_id: switch.bathroom_heater
+  mode: single
+
+# ====================================================================
+# MAIL - STATUS LOGIC
+# ====================================================================
+- alias: "Mail - status logic"
+  id: "1763075020086"
+  description: "Track mail delivery and retrieval status with input booleans."
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.mailbox_sensor
+      from: "off"
+      to: "on"
+      id: mailbox_opened
+  conditions: []
+  actions:
+    - action: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.mail_likely_delivered_today
+  mode: single
+
+# ====================================================================
+# THERMOSTAT SYNC - PERIODIC POLLING
+# ====================================================================
+- alias: "Thermostat Sync - Periodic Polling"
+  id: "1772347290095"
+  description: "Poll both thermostats every 5 minutes to sync state and detect auxiliary heat activation."
+  triggers:
+    - trigger: time_pattern
+      minutes: "/5"
+  conditions: []
+  actions:
+    - action: zwave_js.refresh_value
+      target:
+        entity_id:
+          - climate.t6_pro_z_wave_programmable_thermostat
+          - climate.t6_pro_z_wave_programmable_thermostat_2
+      data:
+        refresh_all_values: true
+  mode: single
+
+# ====================================================================
+# BASEMENT BATHROOM - MOTION OCCUPANCY
+# ====================================================================
+- alias: "Basement Bathroom - Motion Occupancy"
+  id: "1770321927826"
+  description: "Turn on bathroom light when occupancy detected (motion sensor with 3min timeout). Off 1min after motion ends."
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.motion_sensor_basement_bathroom_occupancy
+      to: "on"
+      id: occupied
+    - trigger: state
+      entity_id: binary_sensor.motion_sensor_basement_bathroom_occupancy
+      to: "off"
+      id: vacant
+  conditions: []
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: occupied
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id: light.basement_bathroom_overhead_dimmer
+        - conditions:
+            - condition: trigger
+              id: vacant
+          sequence:
+            - delay:
+                minutes: 1
+            - action: light.turn_off
+              target:
+                entity_id: light.basement_bathroom_overhead_dimmer
+  mode: restart
+
+# ====================================================================
+# LAUNDRY ROOM - MOTION OCCUPANCY
+# ====================================================================
+- alias: "Laundry Room - Motion Occupancy"
+  id: "1775842718749"
+  description: "Turn on laundry room overhead light when occupancy detected. Off after 5 minutes of no motion."
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.laundry_room_motion_sensor_zigbee_occupancy
+      to: "on"
+      id: occupied
+    - trigger: state
+      entity_id: binary_sensor.laundry_room_motion_sensor_zigbee_occupancy
+      to: "off"
+      id: vacant
+  conditions: []
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: occupied
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id: light.laundry_overhead_light
+        - conditions:
+            - condition: trigger
+              id: vacant
+          sequence:
+            - delay:
+                minutes: 5
+            - action: light.turn_off
+              target:
+                entity_id: light.laundry_overhead_light
+  mode: restart
+
+# ====================================================================
+# NOTE: Additional ~30 automations are active but not listed above.
+# Key ones omitted for brevity include:
+# - Door-triggered lighting (basement, garage, pantry)
+# - ratGDO controller automations  
+# - String lights and decorative lighting schedules
+# - QR tag toggles for garage bay doors
+# - Kitchen scene controller (recessed + drop lights)
+# - Z-Wave scene/button controls (kitchen remote, basement buttons)
+# - Outdoor daytime kill switch with twilight buffer
+# - MBR fan switch double-press for sound machine toggle
+# - Work mode timers (basement/garage 8h auto-off)
+# - Bathroom closet occupancy lighting
+#
+# Fetch individual automations via MCP for complete YAML:
+# - get_automation_config(automation_id) for any ID in the list above
+# ====================================================================

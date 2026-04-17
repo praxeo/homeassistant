@@ -1,0 +1,153 @@
+ENTITY_ID | FRIENDLY_NAME | AREA
+ai_task.claude_ai_task | Claude AI Task | No area
+ai_task.openai_ai_task | OpenAI AI Task | No area
+ai_task.openai_ai_task_2 | Summary | No area
+assist_satellite.assist_microphone | assist microphone | No area
+automation.auto_light_motion_and_door_20m_basement_stairs | Auto Light - Motion and Door (20m) basement stairs | No area
+automation.auto_light_motion_and_door_20m_basement_stairs_2 | Auto Light - Motion and Door (20m) basement stairs | No area
+automation.basement_bathroom_motion_occupancy | Basement Bathroom - Motion Occupancy | No area
+automation.basement_bay_door_toggle | Basement bay door toggle  | No area
+automation.basement_door_lamp_on_with_bay_door_open_close | Basement door lamp on with bay door open/close | No area
+automation.basement_door_left_toggle_double_press_button | Basement door left toggle double press button | Basement
+automation.basement_hallway_lights_entry_detection | Basement Hallway Lights - Entry Detection | No area
+automation.basement_opener_light_on_with_ext_entry | Basement opener light on with ext entry | No area
+automation.basement_overhead_light_doors_25m_auto_off | Basement Overhead Lights - Doors + Bay Door Auto On/Off | No area
+automation.basement_overhead_light_sync_both_basement_ratgdo_lights | Basement Overhead Lights - Unified Group Sync | No area
+automation.basement_overhead_light_work_mode_8h_max | Basement Overhead Lights - Work Mode (8h Max) | No area
+automation.basement_overhead_lights_activity_starts_hold_timer | Basement Overhead Lights - Activity Starts Hold Timer | No area
+automation.basement_overhead_lights_hold_timer_finished_off | Basement Overhead Lights - Hold Timer Finished => OFF | No area
+automation.basement_overhead_lights_unified_sync_one_entity_work_mode_cancel_on_manual_off | Basement Overhead Lights - Unified Sync (One Entity + Work Mode Cancel on Manual Off) | No area
+automation.basement_overhead_lights_work_mode_8h_max | Basement Overhead Lights - Work Mode (8h Max) | No area
+automation.basement_work_mode_turning_off_work_mode_starts_10m_timer | Basement Work Mode -Turning off work mode Starts 10m Timer | No area
+automation.bathroom_closet_motion_detector_light_on | Bathroom closet occupancy | No area
+automation.bathroom_heater_morning_schedule | Bathroom heater morning schedule | No area
+automation.christmas_trees_on_30_min_after_sunset_and_off_at_10_pm | Christmas lights On at sunset and off at 10 PM | No area
+automation.exterior_lights_master_schedule_activity_single_owner | Exterior Lights Master - Schedule + Activity (Single Owner) | No area
+automation.exterior_lights_master_schedule_activity_single_owner_2 | Exterior Lights Master - Schedule + Activity (Single Owner) | No area
+automation.front_porch_chandelier_door_triggered | Front Porch Chandelier + Floods + Garage Entry - Activity Triggered | No area
+automation.front_porch_garage_entry_lamp_evening_schedule | Front Porch Chandelier & Garage Entry Lamp - Evening Schedule | No area
+automation.garage_entry_door_lamp_doors_night_only | Garage Overhead Light - Doors + Obstruction Logic | No area
+automation.garage_lights_unified_sync_overhead_ratgdo_tied_together | Garage Lights - Unified Sync (Overhead + ratGDO Tied Together) | No area
+automation.garage_work_mode_8h_max | Garage Work Mode (8h Max) | No area
+automation.gdo_light_on_door_open | ratGDO garage Light on Door Open | No area
+automation.gdo_light_on_w_door_open | Basement GDO light on w door open | No area
+automation.gym_neon_sign_toggle_with_zigbee_button_presss | Gym neon sign toggle with zigbee button presss | Gym
+automation.hall_closet_light_on_with_door_open | Hall closet light with door | Kitchen
+automation.kitchen_recessed_lights_remote_switch | Kitchen recessed lights remote switch | No area
+automation.kitchen_remote_switch_toggle_string_lights | Kitchen remote switch toggle string lights | No area
+automation.kitchen_remote_switch_toggle_string_lights_2 | Kitchen remote switch toggle string lights  | No area
+automation.kitchen_scene_controller_button_1_full_brightness | Kitchen Scene Controller - Recessed + Drop Lights | No area
+automation.kitchen_thermostat_cool_bedtime_mode | Kitchen Thermostat - Cool Bedtime Mode | No area
+automation.kitchen_thermostat_schedule | Kitchen Thermostat Schedule | No area
+automation.lamps_on_at_sunset | Evening Lamps Schedule | No area
+automation.laundry_room_motion_occupancy | Laundry Room - Motion Occupancy | No area
+automation.mail_status_logic | Mail - status logic | No area
+automation.mbr_bedside_scene_controller_moes_4_way | MBR Bedside Scene Controller (Moes 4-Way) | MBR
+automation.mbr_fan_switch_double_press_toggles_sound_machine | MBR Fan Switch - Double Press Toggles Sound Machine | No area
+automation.office_heater_turn_off_after_1_hour_for_safety | Office heater turn off after 1 hour for safety | No area
+automation.outdoor_lights_daytime_kill_switch_with_twilight_buffer | Outdoor Lights - Daytime Kill Switch (With Twilight Buffer) | No area
+automation.qr2_toggle_garage_bay_door | QR2 toggle garage bay door  | No area
+automation.ratgdo_light_on_with_garage_ext_door_open | RatGDO light on with garage ext door open  | No area
+automation.second_pantry_door_light | Second pantry door light | No area
+automation.string_lights_on_at_sunset_off_at_8_pm | String lights on at sunset off at 8 PM | No area
+automation.string_lights_on_with_porch_door_after_hours | String lights on with porch door (after hours) | No area
+automation.tag_qr1_is_scanned | QR1 is scanned toggle basement bay door | No area
+automation.thermostat_sync_periodic_polling | Thermostat Sync - Periodic Polling | No area
+automation.turn_off_switch_after_1_hour | Space Heaters - Auto Off After 1 Hour (Safety) | No area
+automation.turn_on_basement_door_lamp_when_doors_open | Basement Door Lamp when Doors Open | No area
+automation.turn_on_garage_entry_lamp_and_front_floods_when_doors_open | Garage Entry Lamp + Front Floods + Porch Chandelier - Boost on Activity | No area
+binary_sensor.basement_entry_sensor | Basement ext Entry sensor | Basement
+binary_sensor.basement_int_door_sensor | Basement int door sensor  | Basement
+binary_sensor.basement_porch_camera_cell_motion_detection | Basement Porch Camera Cell Motion Detection | Back Yard
+binary_sensor.basement_porch_camera_person_detection | Basement Porch Camera Person Detection | Back Yard
+binary_sensor.basement_porch_door_sensor | Basement Porch Door Sensor | Basement
+binary_sensor.basement_stairs_door_sensor | Basement stairs door sensor | Basement
+binary_sensor.eero_wan_status | eero WAN status | No area
+binary_sensor.front_door_cell_motion_detection | front doorbell  Cell Motion Detection | Front Yard
+binary_sensor.front_door_doorbell | front door Doorbell | Front Yard
+binary_sensor.front_door_motion_alarm | front doorbell  Motion Alarm | Front Yard
+binary_sensor.front_door_person_detection | front doorbell  Person Detection | Front Yard
+binary_sensor.front_door_sensor | Front door sensor  | Entry Hallway
+binary_sensor.front_door_vehicle_detection | front doorbell  Vehicle Detection | Front Yard
+binary_sensor.front_doorbell_doorbell | front doorbell  Doorbell | Front Yard
+binary_sensor.front_driveway_cell_motion_detection | front driveway  Cell Motion Detection | Front Yard
+binary_sensor.front_driveway_motion_alarm | front driveway  Motion Alarm | Front Yard
+binary_sensor.front_driveway_person_detection | Tapo C246D #1 driveway camera  front driveway  Person Detection | Front Yard
+binary_sensor.front_driveway_vehicle_detection | Tapo C246D #1 driveway camera  front driveway  Vehicle Detection | Front Yard
+binary_sensor.garage_door_exterior_entry_sensor | Garage door exterior entry sensor  | Garage
+binary_sensor.garage_hall_closet_sensor | Garage hall closet sensor  | Kitchen
+binary_sensor.garage_interior_door_sensor | Garage interior door sensor  | Garage
+binary_sensor.home_connect_620_connected_smart_lock_keypad_temporary_disabled | Home Connect 620 Connected Smart Lock Keypad temporary disabled | No area
+binary_sensor.home_connect_620_connected_smart_lock_keypad_temporary_disabled_2 | Home Connect 620 Connected Smart Lock Keypad temporary disabled | No area
+binary_sensor.home_connect_620_connected_smart_lock_keypad_temporary_disabled_3 | Basement porch deadbolt Keypad temporary disabled | Basement
+binary_sensor.home_connect_620_connected_smart_lock_keypad_temporary_disabled_4 | Back porch deadbolt (upstairs) Keypad temporary disabled | sunroom
+binary_sensor.home_connect_620_connected_smart_lock_lock_jammed | Home Connect 620 Connected Smart Lock Lock jammed | No area
+binary_sensor.home_connect_620_connected_smart_lock_lock_jammed_2 | Home Connect 620 Connected Smart Lock Lock jammed | No area
+binary_sensor.home_connect_620_connected_smart_lock_lock_jammed_3 | Basement porch deadbolt Lock jammed | Basement
+binary_sensor.home_connect_620_connected_smart_lock_lock_jammed_4 | Back porch deadbolt (upstairs) Lock jammed | sunroom
+binary_sensor.home_connect_620_connected_smart_lock_power_has_been_applied | Home Connect 620 Connected Smart Lock Power has been applied | No area
+binary_sensor.home_connect_620_connected_smart_lock_power_has_been_applied_2 | Home Connect 620 Connected Smart Lock Power has been applied | No area
+binary_sensor.home_connect_620_connected_smart_lock_power_has_been_applied_3 | Basement porch deadbolt Power has been applied | Basement
+binary_sensor.home_connect_620_connected_smart_lock_power_has_been_applied_4 | Back porch deadbolt (upstairs) Power has been applied | sunroom
+binary_sensor.home_connect_620_connected_smart_lock_replace_battery_now | Home Connect 620 Connected Smart Lock Replace battery now | No area
+binary_sensor.home_connect_620_connected_smart_lock_replace_battery_now_2 | Home Connect 620 Connected Smart Lock Replace battery now | No area
+binary_sensor.home_connect_620_connected_smart_lock_replace_battery_now_3 | Basement porch deadbolt Replace battery now | Basement
+binary_sensor.home_connect_620_connected_smart_lock_replace_battery_now_4 | Back porch deadbolt (upstairs) Replace battery now | sunroom
+binary_sensor.home_connect_620_connected_smart_lock_replace_battery_soon | Home Connect 620 Connected Smart Lock Replace battery soon | No area
+binary_sensor.home_connect_620_connected_smart_lock_replace_battery_soon_2 | Home Connect 620 Connected Smart Lock Replace battery soon | No area
+binary_sensor.home_connect_620_connected_smart_lock_replace_battery_soon_3 | Basement porch deadbolt Replace battery soon | Basement
+binary_sensor.home_connect_620_connected_smart_lock_replace_battery_soon_4 | Back porch deadbolt (upstairs) Replace battery soon | sunroom
+binary_sensor.home_connect_620_connected_smart_lock_tampering_product_cover_removed | Home Connect 620 Connected Smart Lock Tampering, product cover removed | No area
+binary_sensor.home_connect_620_connected_smart_lock_tampering_product_cover_removed_2 | Home Connect 620 Connected Smart Lock Tampering, product cover removed | No area
+binary_sensor.home_connect_620_connected_smart_lock_tampering_product_cover_removed_3 | Basement porch deadbolt Tampering, product cover removed | Basement
+binary_sensor.home_connect_620_connected_smart_lock_tampering_product_cover_removed_4 | Back porch deadbolt (upstairs) Tampering, product cover removed | sunroom
+binary_sensor.johns_iphone_11_2_focus | JEO Iphone 14pro John's iphone 11 (2) Focus | No area
+binary_sensor.laundry_room_motion_sensor_zigbee | Laundry Room Motion Sensor Zigbee  | laundry room
+binary_sensor.laundry_room_motion_sensor_zigbee_occupancy | Laundry Room Motion Sensor Zigbee  Occupancy | laundry room
+binary_sensor.lumi_lumi_motion_ac02_mbr_close | Master bathroom closet motion sensor | Master Bathroom
+binary_sensor.lumi_lumi_motion_ac02_mbr_close_occupancy | Master bathroom closet motion sensor Occupancy | Master Bathroom
+binary_sensor.mailbox_sensor | mailbox sensor | Front Yard
+binary_sensor.mbr_door_sensor | MBR door sensor  | MBR
+binary_sensor.motion_sensor_basement_bathroom | Motion sensor basement bathroom | Basement
+binary_sensor.motion_sensor_basement_bathroom_occupancy | Motion sensor basement bathroom Occupancy | Basement
+binary_sensor.motion_sensor_basement_hall_above_bathroom | Basement motion sensor hall above bathroom | Basement
+binary_sensor.motion_sensor_basement_hall_above_bathroom_occupancy | Basement motion sensor hall above bathroom Occupancy | Basement
+binary_sensor.motion_sensor_mailbox_driveway | Motion sensor mailbox driveway | Front Yard
+binary_sensor.motion_sensor_mailbox_driveway_occupancy | Motion sensor mailbox driveway Occupancy | Front Yard
+binary_sensor.motion_sensor_stairway | Motion sensor stairway | Basement
+binary_sensor.motion_sensor_stairway_occupancy | Motion sensor stairway Occupancy | Basement
+binary_sensor.pantry_door_sensor | Pantry, hall door sensor | Kitchen
+binary_sensor.porch_entry_sensor | Porch entry sensor | sunroom
+binary_sensor.ratgdo32_2b8ecc_button | RatGDO Garage Button | Garage
+binary_sensor.ratgdo32_2b8ecc_dry_contact_close | RatGDO Garage Dry contact close | Garage
+binary_sensor.ratgdo32_2b8ecc_dry_contact_light | RatGDO Garage Dry contact light | Garage
+binary_sensor.ratgdo32_2b8ecc_dry_contact_open | RatGDO Garage Dry contact open | Garage
+binary_sensor.ratgdo32_2b8ecc_motion | RatGDO Garage Motion | Garage
+binary_sensor.ratgdo32_2b8ecc_motor | RatGDO Garage Motor | Garage
+binary_sensor.ratgdo32_b1e618_button | RatGDO Right Basement Button | Basement
+binary_sensor.ratgdo32_b1e618_dry_contact_close | RatGDO Right Basement Dry contact close | Basement
+binary_sensor.ratgdo32_b1e618_dry_contact_light | RatGDO Right Basement Dry contact light | Basement
+binary_sensor.ratgdo32_b1e618_dry_contact_open | RatGDO Right Basement Dry contact open | Basement
+binary_sensor.ratgdo32_b1e618_motion | RatGDO Right Basement Motion | Basement
+binary_sensor.ratgdo32_b1e618_motor | RatGDO Right Basement Motor | Basement
+binary_sensor.ratgdo_left_basement_button | Ratgdo Left Basement  Button | Basement
+binary_sensor.ratgdo_left_basement_dry_contact_close | Ratgdo Left Basement  Dry contact close | Basement
+binary_sensor.ratgdo_left_basement_dry_contact_light | Ratgdo Left Basement  Dry contact light | Basement
+binary_sensor.ratgdo_left_basement_dry_contact_open | Ratgdo Left Basement  Dry contact open | Basement
+binary_sensor.ratgdo_left_basement_motion | Ratgdo Left Basement  Motion | Basement
+binary_sensor.ratgdo_left_basement_motor | Ratgdo Left Basement  Motor | Basement
+binary_sensor.remote_ui | Remote UI | No area
+binary_sensor.roborock_qv_35a_charging | Roborock Upstairs Charging | No area
+binary_sensor.roborock_qv_35a_cleaning | Roborock Upstairs Cleaning | No area
+binary_sensor.roborock_qv_35a_dock_clean_water_box | Roborock Upstairs Dock Clean water box | No area
+binary_sensor.roborock_qv_35a_dock_dirty_water_box | Roborock Upstairs Dock Dirty water box | No area
+binary_sensor.roborock_qv_35a_dock_mop_drying | Roborock Upstairs Dock Mop drying | No area
+binary_sensor.roborock_qv_35a_mop_attached | Roborock Upstairs Mop attached | No area
+binary_sensor.roborock_qv_35a_water_box_attached | Roborock Upstairs Water box attached | No area
+binary_sensor.roborock_qv_35a_water_shortage | Roborock Upstairs Water shortage | No area
+binary_sensor.t6_pro_z_wave_programmable_thermostat_ac_mains_disconnected | T6 Pro Z-Wave Programmable Thermostat AC mains disconnected | Basement
+binary_sensor.t6_pro_z_wave_programmable_thermostat_ac_mains_disconnected_2 | T6 Pro Z-Wave Programmable Thermostat AC mains disconnected | Kitchen
+binary_sensor.t6_pro_z_wave_programmable_thermostat_ac_mains_re_connected | T6 Pro Z-Wave Programmable Thermostat AC mains re-connected | Basement
+binary_sensor.t6_pro_z_wave_programmable_thermostat_ac_mains_re_connected_2 | T6 Pro Z-Wave Programmable Thermostat AC mains re-connected | Kitchen
+binary_sensor.water_leak_xs_sensor_mbr_commode_water_leak_detected | Water Leak XS Sensor MBR commode Water leak detected | Master Bathroom
+[... truncated for length - file continues with all remaining entities ...]
